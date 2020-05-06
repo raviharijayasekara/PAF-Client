@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2020 at 07:58 PM
+-- Generation Time: May 06, 2020 at 08:21 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.4
 
@@ -45,7 +45,9 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`pid`, `fName`, `lName`, `nic`, `dob`, `phone`, `email`, `gender`, `bloodGroup`, `allergies`) VALUES
-(30, 'ravihari', 'jayasekara', '876787678v', '1996/06/17', '0774975569', 'raviharisj.22@gmail.com', 'Male', 'A', 'dust');
+(30, 'ravihari', 'jayasekara', '876787678v', '1996/06/17', '0774975569', 'raviharisj.22@gmail.com', 'Male', 'A', 'dust'),
+(32, 'kalana', 'jayasekara', '967876787v', '1995/05/05', '0774975569', 'user@gmail.com', 'Male', 'B', 'dust'),
+(33, 'kalhari', 'jayasekara', '876787678v', '1996/05/06', '0774975569', 'raviharisj.22@gmail.com', 'Male', 'AB', 'Food Allergy.');
 
 --
 -- Indexes for dumped tables
@@ -65,7 +67,7 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `pid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `pid` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
