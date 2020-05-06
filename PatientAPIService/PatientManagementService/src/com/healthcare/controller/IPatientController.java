@@ -15,11 +15,11 @@ public interface IPatientController {
 	public String getAllPatients();
 	
 	//public String updatePatientDetails(Patient patient);
-	public String updatePatientDetails(String pid, String fName, String lName, String gender, String nic, String dob, String email,
+	public String updatePatientDetails(int pid, String fName, String lName, String gender, String nic, String dob, String email,
 			String phone, String bloodGroup, String allergies);
 
 
-	public String deletePatient(String pid);
+	public String deletePatient(int pid);
 //	
 
 

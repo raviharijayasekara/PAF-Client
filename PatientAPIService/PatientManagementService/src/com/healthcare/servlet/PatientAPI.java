@@ -66,7 +66,7 @@ System.out.println("Patient Api post method");
 		
 		Patient patient = new Patient();
 		
-		patient.setPid(request.getParameter("pid"));
+//		patient.setPid(Integer.parseInt(request.getParameter("pid").toString()));
 		System.out.println("PID in api : " + request.getParameter("fName"));
 		patient.setfName(request.getParameter("fName"));
 		System.out.println("First Name in api : " + request.getParameter("fName"));
@@ -95,15 +95,15 @@ System.out.println("Patient Api post method");
 		System.out.println("patient name: " + paras.get("fName").toString());
 		
 		String output = PatientController.updatePatientDetails(
-				paras.get("hidPatientIdSave").toString(),
+				Integer.parseInt(paras.get("hidPatientIdSave").toString()),
 				paras.get("fName").toString(),
 				paras.get("lName").toString(),
 				paras.get("gender").toString(),
-				paras.get("NIC").toString(),
-				paras.get("DOB").toString(),
-				paras.get("bloodGroup").toString(),
+				paras.get("nic").toString(),
+				paras.get("dob").toString().replace("%2F", "/"),
 				paras.get("email").toString().replace("%40", "@"),
 				paras.get("phone").toString(),				
+				paras.get("bloodGroup").toString(),
 				paras.get("allergies").toString());
 
 		response.getWriter().write(output);
@@ -115,7 +115,7 @@ System.out.println("Patient Api post method");
 		
 		Map paras = getParasMap(request);
 		
-		String output = PatientController.deletePatient(paras.get("pid").toString());
+		String output = PatientController.deletePatient(Integer.parseInt(paras.get("pid").toString()));
 		
 		response.getWriter().write(output);
 	}

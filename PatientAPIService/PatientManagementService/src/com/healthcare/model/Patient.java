@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Patient {
 
 	
-	private String pid;
+	private int pid;
 	private String fName;
 	private String lName;
 	private String gender;
@@ -22,7 +22,7 @@ public class Patient {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Patient(String pid, String fName, String lName, String gender, String nic, String dob, String email,
+	public Patient(int pid, String fName, String lName, String gender, String nic, String dob, String email,
 			String phone, String bloodGroup, String allergies) {
 		super();
 		this.pid = pid;
@@ -38,11 +38,11 @@ public class Patient {
 	}
 
 	
-	public String getPid() {
+	public int getPid() {
 		return pid;
 	}
 	
-	public void setPid(String pid) {
+	public void setPid(int pid) {
 		this.pid = pid;
 	}
 	

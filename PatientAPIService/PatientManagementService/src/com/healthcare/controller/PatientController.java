@@ -47,23 +47,23 @@ public class PatientController implements IPatientController {
 		try {
 
 			con = DBConnection.getDBConnection();
-			String query = "INSERT INTO patient(pid,fName, lName, nic, dob, phone, email, gender, bloodGroup, allergies) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			//String query = "INSERT INTO patient(firstName, lastName, gender, NIC, DOB, bloodGroup, email, phone, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+			String query = "INSERT INTO patient(fName, lName, nic, dob, phone, email, gender, bloodGroup, allergies) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?)";
+			
 			preparedStmt = con.prepareStatement(query);
 
-				preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patient.getPid());
+//				preparedStmt.(Constants.COLUMN_INDEX_ONE, patient.getPid());
 				System.out.println("PatientId :" + patient.getPid());
-				preparedStmt.setString(Constants.COLUMN_INDEX_TWO, patient.getfName());
+				preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patient.getfName());
 				System.out.println("PatientName :" + patient.getfName());
-				preparedStmt.setString(Constants.COLUMN_INDEX_THREE, patient.getlName());
-				preparedStmt.setString(Constants.COLUMN_INDEX_FOUR, patient.getNic());
-				preparedStmt.setString(Constants.COLUMN_INDEX_FIVE, patient.getDob());
-				preparedStmt.setString(Constants.COLUMN_INDEX_SIX, patient.getPhone());
-				preparedStmt.setString(Constants.COLUMN_INDEX_SEVEN, patient.getEmail());
-				preparedStmt.setString(Constants.COLUMN_INDEX_EIGHT, patient.getGender());
-				preparedStmt.setString(Constants.COLUMN_INDEX_NINE, patient.getBloodGroup());
-				preparedStmt.setString(Constants.COLUMN_INDEX_TEN, patient.getAllergies());
+				preparedStmt.setString(Constants.COLUMN_INDEX_TWO, patient.getlName());
+				preparedStmt.setString(Constants.COLUMN_INDEX_THREE, patient.getNic());
+				System.out.println("Nic :" + patient.getNic());
+				preparedStmt.setString(Constants.COLUMN_INDEX_FOUR, patient.getDob());
+				preparedStmt.setString(Constants.COLUMN_INDEX_FIVE, patient.getPhone());
+				preparedStmt.setString(Constants.COLUMN_INDEX_SIX, patient.getEmail());
+				preparedStmt.setString(Constants.COLUMN_INDEX_SEVEN, patient.getGender());
+				preparedStmt.setString(Constants.COLUMN_INDEX_EIGHT, patient.getBloodGroup());
+				preparedStmt.setString(Constants.COLUMN_INDEX_NINE, patient.getAllergies());
 				preparedStmt.executeUpdate();
 			
 		
@@ -107,7 +107,7 @@ public class PatientController implements IPatientController {
 			try {
 				con = DBConnection.getDBConnection();
 
-				String query = "SELECT patientId FROM patient";
+				String query = "SELECT pid FROM patient";
 
 				preparedStmt = con.prepareStatement(query);
 				rs = preparedStmt.executeQuery();
@@ -159,7 +159,7 @@ public class PatientController implements IPatientController {
 
 			while (rs.next()) {
 
-				String pid = rs.getString("pid");
+				int pid = rs.getInt("pid");
 				String fName = rs.getString("fName");
 				String lName = rs.getString("lName");
 				String nic = rs.getString("nic");
@@ -172,7 +172,7 @@ public class PatientController implements IPatientController {
 		
 				System.out.println("GetAllAPtient : pid : " + pid);
 
-				output += "<tr><td><input id = \"hidPatientIdUpdate\" name = \"hidPatientIdUpdate\" type=\"hidden\" value = '" + pid + "'>" + pid + "</td>";
+				output += "<tr><td><input id = \"hidPatientIdSave\" name = \"hidPatientIdSave\" type=\"hidden\" value = '" + pid + "'>" + pid + "</td>";
 				output += "<td>" + fName + "</td>";
 				output += "<td>" + lName + "</td>";
 				output += "<td>" + gender + "</td>";
@@ -221,7 +221,7 @@ public class PatientController implements IPatientController {
 
 	// to update patient details
 	@Override
-	public String updatePatientDetails(String pid, String fName, String lName, String gender, String nic, String dob, String email,
+	public String updatePatientDetails(int pid, String fName, String lName, String gender, String nic, String dob, String email,
 			String phone, String bloodGroup, String allergies) {
 
 		String output = "";
@@ -245,7 +245,7 @@ public class PatientController implements IPatientController {
 			preparedStmt.setString(Constants.COLUMN_INDEX_SEVEN, gender);
 			preparedStmt.setString(Constants.COLUMN_INDEX_EIGHT, bloodGroup);
 			preparedStmt.setString(Constants.COLUMN_INDEX_NINE, allergies);
-			preparedStmt.setString(Constants.COLUMN_INDEX_TEN, pid);	
+			preparedStmt.setInt(Constants.COLUMN_INDEX_TEN, pid);	
 			preparedStmt.execute();
 			
 			System.out.println("Update patintId : " + pid);
@@ -279,22 +279,23 @@ public class PatientController implements IPatientController {
 	
 	// to delete a patient from the system
 	@Override
-	public String deletePatient(String patientId) {
-
+	public String deletePatient(int pid) {
+		
 		String output = "";
+		System.out.println("delete");
 
 		try {
 
 			con = DBConnection.getDBConnection();
 
-			String query = "DELETE FROM patient WHERE patientId = ?";
+			String query = "DELETE FROM patient WHERE pid = ?";
 
 			preparedStmt = con.prepareStatement(query);
 
-			preparedStmt.setString(Constants.COLUMN_INDEX_ONE, patientId);
+			preparedStmt.setInt(1,pid);
 
 			preparedStmt.execute();
-
+			output = "Vaule has been deleted successfully..!\";\r\n";
 			String newPatient = getAllPatients();
 			output = "{\"status\":\"success\", \"data\": \"" + newPatient + "\"}"; 
 

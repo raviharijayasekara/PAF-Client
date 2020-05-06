@@ -18,7 +18,7 @@
 
 
 <!-- JS -->
-<script src="Components/jquery-3.2.1.min.js"></script>
+<script src="Components/jquery-3.4.1.min.js"></script>
 <script src="Components/Patient.js" type="text/javascript"></script>
 <script src="Components/bootstrap-datepicker.min.js"
 	type="text/javascript"></script>
@@ -28,8 +28,8 @@
 
 <body>
 
-<div class="container">
 
+<div class="container">
 
 		<form name="patientSignUp" id="patientSignUp" method="POST"
 			action="Patient.jsp">
@@ -65,11 +65,23 @@
 
 				<div class="col">
 					<label>NIC<label_1> *</label_1></label><br /> <input type="text"
-						placeholder="Enter NIC Number" name="NIC" id="nic"
+						placeholder="Enter NIC Number" name="nic" id="nic"
 						class="form-control form-control-sm"><br />
 				</div>
 			</div>
+	<div class="row">
+				<div class="col">
+					<label>Allergies<label_1> *</label_1></label><br /> <input type="text"
+						placeholder="Enter Allergies" name="allergies" id="allergies"
+						class="form-control form-control-sm"><br />
+				</div>
 
+				<!-- <div class="col">
+					<label>pid<label_1> *</label_1></label><br /> <input type="text"
+						placeholder="Enter PID" name="pid" id="pid"
+						class="form-control form-control-sm"><br />
+				</div> -->
+			</div>
 			<div class="row">
 				<div class="col">
 					<label>Date Of Birth<label_1> *</label_1></label><br /> <input
@@ -90,7 +102,7 @@
 				</div>
 			</div>
 
-			<h5>Contact Information</h5>
+			<h5>Contact Details</h5>
 
 			<div class="row">
 				<div class="col">
@@ -106,27 +118,9 @@
 				</div>
 			</div>
 
-		<div class="row">
-				<div class="col">
-					<label>Allergies<label_1> *</label_1></label><br /> <input type="text"
-						placeholder="Enter Allergies" name="allergies" id="allergies"
-						class="form-control form-control-sm"><br />
-				</div>
-
-				<div class="col">
-					<label>pid<label_1> *</label_1></label><br /> <input type="text"
-						placeholder="Enter PID" name="pid" id="pid"
-						class="form-control form-control-sm"><br />
-				</div>
-			</div>
 			<hr>
 
-			<p>
-				By creating an account you agree to our <a href="#"><b>Terms
-						& Privacy Policy</b></a>
-			</p>
-
-
+		
 			<input id="btnSave" name="btnSave" type="button" value="Add Profile"
 				class="btn btn-primary"> <input type="hidden"
 				id="hidPatientIdSave" name="hidPatientIdSave" value=""> <br>
@@ -144,7 +138,22 @@
 		</div>
 
 	</div>
-
+<script>
+		$(document).ready(
+				function() {
+					var date_input = $('input[name="dob"]');
+					var container = $('.bootstrap-iso form').length > 0 ? $(
+							'.bootstrap-iso form').parent() : "body";
+					var options = {
+						/* format: 'mm/dd/yyyy', */
+						format : 'yyyy/mm/dd',
+						container : container,
+						todayHighlight : true,
+						autoclose : true,
+					};
+					date_input.datepicker(options);
+				})
+	</script>
 
 
 </body>
